@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Styles from './style/StyleSheetFile'
 
 // My Components
-import Button from './parts/Button'
+//import Button from './parts/Button'
 
 type Props = {};
 export default class App extends Component<Props> {

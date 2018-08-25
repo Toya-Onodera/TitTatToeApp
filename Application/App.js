@@ -10,7 +10,8 @@ import {
 import {
     Router,
     Scene,
-    Stack
+    Stack,
+    Lightbox
 } from 'react-native-router-flux'
 
 // My Component
@@ -30,23 +31,27 @@ export default class App extends Component<Props> {
         */}
 
         <Stack key="root">
+          <Lightbox
+            hideNavBar={true}
+          >
             <Scene
               key="Title"
               component={Title}
               hideNavBar={true}
             />
 
+              <Scene
+                key='Setting'
+                component={Setting}
+                hideNavBar={true}
+              />
+          </Lightbox>
+            
             <Scene
               key='Game'
               component={Game}
               hideNavBar={true}
-            />
-
-            <Scene
-              key='Setting'
-              component={Setting}
-              hideNavBar={true}
-            />
+            />            
         </Stack>
       </Router>
     )
