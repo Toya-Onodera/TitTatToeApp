@@ -50,7 +50,9 @@ export default class App extends Component<Props> {
             <Scene
               key='Game'
               component={Game}
-              hideNavBar={true}
+              title='対戦画面'
+              navBarButtonColor='#FAFAFA'
+              navigationBarStyle={{backgroundColor: '#3F5465'}}
             />            
         </Stack>
       </Router>

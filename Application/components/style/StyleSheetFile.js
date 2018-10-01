@@ -117,4 +117,51 @@ module.exports = StyleSheet.create({
     color: '#9E9E9E',
     textAlign: 'center'
   },
+
+  /*** MainGame ***/
+  gamePointView: {
+    position: 'relative',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  gameLeftPointView: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#DFAEB4',
+    justifyContent: 'flex-end'
+  },
+  gameRightPointView: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#119DA4',
+    justifyContent: 'flex-start'
+  },
+  gamePoint: {
+    width: height - (width + 170),
+    height: height - (width + 170),
+    justifyContent: 'center',
+    backgroundColor: '#FAFAFA',
+    alignSelf: 'center'
+  },
+  gamePointText: {
+    alignSelf: 'center',
+    fontSize: 72,
+    fontFamily: 'PocketCalculator'
+  },
+  gamePointIconCommon: {
+    position: 'absolute',
+    alignSelf: 'center'
+  },
+  gamePointIconPositionLeft: {
+    transform: [{translateX: (height - (width + 170)) * -1.5}]
+  },
+  gamePointIconPositionRight: {
+    transform: [{translateX: (height - (width + 170)) * 1.5}]
+  },
+  gameTitTatToeView: {
+    width: width,
+    height: width - 50,
+    backgroundColor: '#FBF8EF'
+  }
 });
