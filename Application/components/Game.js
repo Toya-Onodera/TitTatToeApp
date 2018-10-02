@@ -12,6 +12,7 @@ import {
 import Styles from './style/StyleSheetFile'
 
 // My Components
+import GameChooseAttackView from './parts/GameChooseAttackView'
 import GamePointView from './parts/GamePointView'
 import GameTitTatToeView from './parts/GameTitTatToeView'
 
@@ -26,15 +27,24 @@ export default class App extends Component<Props> {
     super(props)
 
     this.state = {
+      // 選択レイヤー表示フラグ
+      isUseChooseAttack: true,
+
       // 先攻
       playFirstPoint: 0,
 
       //後攻
-      drawFirstPoint: 0
+      drawFirstPoint: 0,
     }
+
+    this._onPressChooseAttackButton = this._onPressChooseAttackButton.bind(this)
   }
 
   render() {
+    const gameChooseAttackView = (this.state.isUseChooseAttack)
+                                      ? <GameChooseAttackView isUseChooseAttack={this.state.isUseChooseAttack} onPress={this._onPressChooseAttackButton} />
+                                      : null
+
     return (
       <View style={Styles.container}>
         {/* 上部分 */}
@@ -46,7 +56,16 @@ export default class App extends Component<Props> {
 
         {/* 下部分 */}
         <GameTitTatToeView />
+        
+        {/* 先攻後攻選択レイヤー */}
+        { gameChooseAttackView }
       </View>
     )
+  }
+
+  _onPressChooseAttackButton () {
+    this.setState({
+      isUseChooseAttack: false
+    })
   }
 }

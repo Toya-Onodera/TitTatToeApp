@@ -119,6 +119,50 @@ module.exports = StyleSheet.create({
   },
 
   /*** MainGame ***/
+  gameChooseAttackViewLayer: {
+    position: 'absolute',
+    width: width,
+    height: height - 80,
+    top: 0,
+    left: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+  },
+  gameChooseAttackView: {
+    width: 280,
+    height: 280,
+    padding: 6,
+    backgroundColor: '#FAFAFA'
+  },
+  gamePlayFirstButton: {
+    flex: 1,
+    height: 64,
+    marginBottom: 3,
+    paddingLeft: 24,
+    paddingRight: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#DFAEB4'
+  },
+  gameDrawFirstButton: {
+    flex: 1,
+    height: 64,
+    marginTop: 3,
+    paddingLeft: 24,
+    paddingRight: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#119DA4'
+  },
+  gamePlayChooseButtonText: {
+    marginRight: 16,
+    color: '#FAFAFA',
+    fontSize: 72,
+    fontFamily: 'ZakkuriGothic'
+  },
   gamePointView: {
     position: 'relative',
     flex: 1,
@@ -146,7 +190,7 @@ module.exports = StyleSheet.create({
   },
   gamePointText: {
     alignSelf: 'center',
-    fontSize: 72,
+    fontSize: 78,
     fontFamily: 'PocketCalculator'
   },
   gamePointIconCommon: {

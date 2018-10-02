@@ -53,6 +53,8 @@
 		FADEB15C4824428A9D4075EB /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4183CF4B6A1E40F3BC746FEE /* SimpleLineIcons.ttf */; };
 		E7070EF1843B4D13B843A4E9 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8F6F95BFC65428C9C678B76 /* Zocial.ttf */; };
 		B0C00455FD9B426E9ED99383 /* Pocket Calculator.TTF in Resources */ = {isa = PBXBuildFile; fileRef = BE555B638FCE4B7B93E4EE60 /* Pocket Calculator.TTF */; };
+		8D968A5E9BCF4EC5B335EACD /* PocketCalculator.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF3E80E0D2264033BDCB542F /* PocketCalculator.ttf */; };
+		E66FC6E77BB54A5790EC72F0 /* ZakkuriGothic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 512483919B4D42379E741483 /* ZakkuriGothic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -375,6 +377,8 @@
 		4183CF4B6A1E40F3BC746FEE /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C8F6F95BFC65428C9C678B76 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		BE555B638FCE4B7B93E4EE60 /* Pocket Calculator.TTF */ = {isa = PBXFileReference; name = "Pocket Calculator.TTF"; path = "../assets/fonts/Pocket Calculator.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CF3E80E0D2264033BDCB542F /* PocketCalculator.ttf */ = {isa = PBXFileReference; name = "PocketCalculator.ttf"; path = "../assets/fonts/PocketCalculator.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		512483919B4D42379E741483 /* ZakkuriGothic.otf */ = {isa = PBXFileReference; name = "ZakkuriGothic.otf"; path = "../assets/fonts/ZakkuriGothic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -657,6 +661,8 @@
 				4183CF4B6A1E40F3BC746FEE /* SimpleLineIcons.ttf */,
 				C8F6F95BFC65428C9C678B76 /* Zocial.ttf */,
 				BE555B638FCE4B7B93E4EE60 /* Pocket Calculator.TTF */,
+				CF3E80E0D2264033BDCB542F /* PocketCalculator.ttf */,
+				512483919B4D42379E741483 /* ZakkuriGothic.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1123,6 +1129,8 @@
 				FADEB15C4824428A9D4075EB /* SimpleLineIcons.ttf in Resources */,
 				E7070EF1843B4D13B843A4E9 /* Zocial.ttf in Resources */,
 				B0C00455FD9B426E9ED99383 /* Pocket Calculator.TTF in Resources */,
+				8D968A5E9BCF4EC5B335EACD /* PocketCalculator.ttf in Resources */,
+				E66FC6E77BB54A5790EC72F0 /* ZakkuriGothic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
