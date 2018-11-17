@@ -182,8 +182,8 @@ module.exports = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   gamePoint: {
-    width: height - (width + 170),
-    height: height - (width + 170),
+    width: width / 3.5,
+    height: width / 3.5,
     justifyContent: 'center',
     backgroundColor: '#FAFAFA',
     alignSelf: 'center'
@@ -198,14 +198,33 @@ module.exports = StyleSheet.create({
     alignSelf: 'center'
   },
   gamePointIconPositionLeft: {
-    transform: [{translateX: (height - (width + 170)) * -1.5}]
+    transform: [{translateX: (width / 3.5) * -1.4}]
   },
   gamePointIconPositionRight: {
-    transform: [{translateX: (height - (width + 170)) * 1.5}]
+    transform: [{translateX: (width / 3.5) * 1.4}]
   },
   gameTitTatToeView: {
-    width: width,
-    height: width - 50,
+    flex: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#FBF8EF'
+  },
+  gameTitTatToeViewHeightStyle: {
+    width: width - 60,
+    height: width - 60,
+  },
+  gameTitTatToeTable: {
+    flex: 1,
+    padding: 12,
+    borderRadius: 6,
+    backgroundColor: '#BBADA0'
+  },
+  titTatToeButtonNone: {
+    width: (width - 108) / 3,
+    height: (width - 108) / 3,
+    marginBottom: 12,
+    marginRight: 12,
+    borderRadius: 6,
+    backgroundColor: '#D8DAD3'
   }
 });
