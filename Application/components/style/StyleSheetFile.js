@@ -165,7 +165,7 @@ module.exports = StyleSheet.create({
   },
   gamePointView: {
     position: 'relative',
-    flex: 1,
+    flex: 3.5,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -182,15 +182,15 @@ module.exports = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   gamePoint: {
-    width: width / 3.5,
-    height: width / 3.5,
+    width: width / 4,
+    height: width / 4,
     justifyContent: 'center',
     backgroundColor: '#FAFAFA',
     alignSelf: 'center'
   },
   gamePointText: {
     alignSelf: 'center',
-    fontSize: 78,
+    fontSize: width / 5,
     fontFamily: 'PocketCalculator'
   },
   gamePointIconCommon: {
@@ -198,33 +198,44 @@ module.exports = StyleSheet.create({
     alignSelf: 'center'
   },
   gamePointIconPositionLeft: {
-    transform: [{translateX: (width / 3.5) * -1.4}]
+    transform: [{translateX: (width / 4) * -1.5}]
   },
   gamePointIconPositionRight: {
-    transform: [{translateX: (width / 3.5) * 1.4}]
+    transform: [{translateX: (width / 4) * 1.5}]
   },
   gameTitTatToeView: {
-    flex: 1.5,
+    flex: 5.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FBF8EF'
   },
   gameTitTatToeViewHeightStyle: {
-    width: width - 60,
-    height: width - 60,
+    width: width - 48,
+    height: width - 48,
   },
   gameTitTatToeTable: {
     flex: 1,
-    padding: 12,
+    margin: 16,
+    padding: 8,
     borderRadius: 6,
     backgroundColor: '#BBADA0'
   },
-  titTatToeButtonNone: {
-    width: (width - 108) / 3,
-    height: (width - 108) / 3,
-    marginBottom: 12,
-    marginRight: 12,
+  titTatToeButton: {
+    width: (width - 112) / 3,
+    height: (width - 112) / 3,
+    marginBottom: 8,
+    marginRight: 8,
     borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  titTatToeButtonNone: {
     backgroundColor: '#D8DAD3'
+  },
+  titTatToeButtonCircle: {
+    backgroundColor: '#119DA4'
+  }, 
+  titTatToeButtonCross: {
+    backgroundColor: '#DFAEB4'
   }
 });

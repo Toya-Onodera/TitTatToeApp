@@ -79,9 +79,9 @@ export default class App extends Component<Props> {
 
   // ○×の配列データを書き換える
   // setState ではインデックスを直接コピー出来ないのでこの方法を使用する
-  _onPressTitTatToeButton (num) {
-    const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice()
-    gameTitTatToeViewMaps_Copy[num] = ((this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? 10 : -10
+  _onPressTitTatToeButton (ind) {
+    const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice(',')
+    gameTitTatToeViewMaps_Copy[ind].value = ((this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? 10 : -10
     
     this.setState({
       gameTitTatToeViewMaps: gameTitTatToeViewMaps_Copy

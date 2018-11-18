@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   Text,
+  Dimensions
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -13,6 +14,8 @@ import Styles from '../style/StyleSheetFile'
 
 // My Components
 import GamePoint from './GamePoint'
+
+const iconFontSize = Dimensions.get('window').width / 6;
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -41,7 +44,7 @@ export default class App extends Component<Props> {
           />
         </View>
 
-        <Icon name="check-circle" size={72} color="#FAFAFA" style={[Styles.gamePointIconCommon, iconStyle]} />
+        <Icon name="check-circle" size={iconFontSize} color="#FAFAFA" style={[Styles.gamePointIconCommon, iconStyle]} />
       </View>
   	)
   }

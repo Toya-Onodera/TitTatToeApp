@@ -7,8 +7,6 @@ import {
   FlatList
 } from 'react-native'
 
-import Icon from 'react-native-vector-icons/MaterialIcons'
-
 // StyleSheet
 import Styles from '../style/StyleSheetFile'
 
@@ -34,8 +32,8 @@ export default class App extends Component<Props> {
             data={this.props.mapsData}
             extraData={this.props}
             keyExtractor={(val, ind) => `TitTatToeButton-${ind}`}
-            renderItem={({val, ind}) => {
-              return (<TitTatToeButton value={val} index={ind} onPress={this.props.onPress} />)
+            renderItem={({item, index}) => {
+              return (<TitTatToeButton value={item.value} index={index} onPress={this.props.onPress} />)
             }}
           />
         </View>
