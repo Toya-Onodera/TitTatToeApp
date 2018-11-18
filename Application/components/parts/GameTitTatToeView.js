@@ -23,7 +23,6 @@ export default class App extends Component<Props> {
     super(props)
   }
 
-            //contentContainerStyle={Styles.gameTitTatToeTableInner}
   render() {    
     return (
       <View style={Styles.gameTitTatToeView}>
