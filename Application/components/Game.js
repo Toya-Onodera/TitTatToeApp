@@ -28,7 +28,11 @@ export default class App extends Component<Props> {
 
     this.state = {
       // 選択レイヤー表示フラグ
-      isUseChooseAttack: false, // TODO: 開発時に邪魔だから一時的に
+      isUseChooseAttack: true, // TODO: 開発時に邪魔だから一時的に
+
+      // 先行後攻選択変数
+      // 0 -> 先行、 1 -> 後攻
+      isFirstAttack: 0,
 
       // 先攻
       playFirstPoint: 0,
@@ -37,8 +41,8 @@ export default class App extends Component<Props> {
       drawFirstPoint: 0,
 
       // 得点管理用
-      // null -> 記号なし、 10 -> ○ 、 -10 -> ×
-      gameTitTatToeViewMaps: [{value: null}, {value: null}, {value: null}, {value: null}, {value: null}, {value: null}, {value: null}, {value: null}, {value: null}]
+      // 0 -> 記号なし、 10 -> ○ 、 -10 -> ×
+      gameTitTatToeViewMaps: [{value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}]
     }
 
     this._onPressChooseAttackButton = this._onPressChooseAttackButton.bind(this)
@@ -56,7 +60,7 @@ export default class App extends Component<Props> {
         <GamePointView
           playFirstPoint={this.state.playFirstPoint}
           drawFirstPoint={this.state.drawFirstPoint}
-          turn={(this.state.playFirstPoint + this.state.drawFirstPoint)}
+          turn={(this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint)}
         />
 
         {/* 下部分 */}
@@ -71,20 +75,39 @@ export default class App extends Component<Props> {
     )
   }
 
-  _onPressChooseAttackButton () {
+  // 先行後攻の選択
+  _onPressChooseAttackButton (_isFirstAttack) {
     this.setState({
-      isUseChooseAttack: false
+      isUseChooseAttack: false,
+      isFirstAttack: _isFirstAttack
     })
   }
 
   // ○×の配列データを書き換える
   // setState ではインデックスを直接コピー出来ないのでこの方法を使用する
   _onPressTitTatToeButton (ind) {
-    const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice(',')
-    gameTitTatToeViewMaps_Copy[ind].value = ((this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? 10 : -10
+    const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice()
+    gameTitTatToeViewMaps_Copy[ind].value = ((this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? -10 : 10
     
     this.setState({
       gameTitTatToeViewMaps: gameTitTatToeViewMaps_Copy
     })
+
+    this._addPoints()
+  }
+
+  // 得点を追加するメソッド
+  _addPoints () {
+    if ((this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) {
+      this.setState(previousState => {
+        return { playFirstPoint: previousState.playFirstPoint + 1 }
+      })
+    }
+
+    else {
+      this.setState(previousState => {
+        return { drawFirstPoint: previousState.drawFirstPoint + 1 }
+      })
+    }
   }
 }

@@ -23,7 +23,7 @@ export default class App extends Component<Props> {
 
   render() {    
     // 記号なしを入れておく
-    if (this.props.value === null) {
+    if (this.props.value === 0) {
       return (
         <TouchableOpacity
           style={[Styles.titTatToeButton, Styles.titTatToeButtonNone]}
@@ -34,22 +34,22 @@ export default class App extends Component<Props> {
     // ○
     if (this.props.value === 10) {
       return (
-        <TouchableOpacity
+        <View
           style={[Styles.titTatToeButton, Styles.titTatToeButtonCircle]}
-          onPress={() => this.props.onPress(this.props.index)}>
+        >
           <Icon name="panorama-fish-eye" size={iconFontSize} color="#FAFAFA" />
-        </TouchableOpacity>
+        </View>
       )
     }
 
     // ×
     else if (this.props.value === -10) {
       return (
-        <TouchableOpacity
+        <View
           style={[Styles.titTatToeButton, Styles.titTatToeButtonCross]}
-          onPress={() => this.props.onPress(this.props.index)}>
+        >
           <Icon name="clear" size={iconFontSize} color="#FAFAFA" />
-        </TouchableOpacity>
+        </View>
       )
     }
   }
