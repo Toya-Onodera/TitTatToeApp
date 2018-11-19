@@ -28,7 +28,10 @@ export default class App extends Component<Props> {
 
     this.state = {
       // 選択レイヤー表示フラグ
-      isUseChooseAttack: true, // TODO: 開発時に邪魔だから一時的に
+      isUseChooseAttack: true,
+
+      // ゲームフラグ
+      isGame: true,
 
       // 先行後攻選択変数
       // 0 -> 先行、 1 -> 後攻
@@ -93,7 +96,12 @@ export default class App extends Component<Props> {
       gameTitTatToeViewMaps: gameTitTatToeViewMaps_Copy
     })
 
+    
+    // 得点を追加する
     this._addPoints()
+
+    // 勝利判定を行い、試合が決まれば結果を表示
+    this._winnerResult()
   }
 
   // 得点を追加するメソッド
@@ -108,6 +116,90 @@ export default class App extends Component<Props> {
       this.setState(previousState => {
         return { drawFirstPoint: previousState.drawFirstPoint + 1 }
       })
+    }
+  }
+
+  // 勝利判定を行うメソッド
+  // ○ が勝利なら return 1、 × が勝利なら return 2、 試合が決まっていない or 引き分けなら return 0
+  _judgmentGame () {
+    let i, j;
+
+    // 確認用 (計算結果を代入) の変数
+    const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice()
+
+    // 横
+    for (i = 0; i < 3; i++) {
+      lineSum = 0;
+
+      for (j = 0; j < 3; j++) {
+        lineSum += gameTitTatToeViewMaps_Copy[(3 * i) + j].value
+      }
+
+      switch (lineSum) {
+        case 30:
+          return 1
+        case -30:
+          return 2
+      }
+    }
+
+    // 縦
+    for (i = 0; i < 3; i++) {
+      lineSum = 0
+
+      for (j = 0; j < 3; j++) {
+        lineSum += gameTitTatToeViewMaps_Copy[i + (3 * j)].value
+      }
+
+      switch (lineSum) {
+        case 30:
+          return 1
+        case -30:
+          return 2
+      }
+    }
+
+    // 1、5、9 の斜め
+    lineSum = gameTitTatToeViewMaps_Copy[0].value + gameTitTatToeViewMaps_Copy[4].value + gameTitTatToeViewMaps_Copy[8].value
+    
+    switch (lineSum){
+      case 30:
+        return 1
+      case -30:
+        return 2
+    }
+
+    // 3、5、7 の斜め
+    lineSum = gameTitTatToeViewMaps_Copy[2].value + gameTitTatToeViewMaps_Copy[4].value + gameTitTatToeViewMaps_Copy[6].value
+
+    switch (lineSum){
+      case 30:
+        return 1
+      case -30:
+        return 2
+    }
+
+    // 引き分け
+    if ((this.state.playFirstPoint + this.state.drawFirstPoint) === 8)
+      return 0
+
+    return null
+  }
+
+  // 勝利判定のあとの動作メソッド
+  _winnerResult () {
+    const judgmentResult = this._judgmentGame()
+
+    switch (judgmentResult) {
+      case 0:
+        alert('引き分け')
+        break
+      case 1:
+        alert('○ の勝利')
+        break
+      case 2:
+        alert('× の勝利')
+        break
     }
   }
 }
