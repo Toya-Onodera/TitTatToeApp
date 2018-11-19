@@ -198,10 +198,10 @@ module.exports = StyleSheet.create({
     alignSelf: 'center'
   },
   gamePointIconPositionLeft: {
-    transform: [{translateX: (width / 4) * -1.5}]
+    transform: [{ translateX: (width / 4) * -1.5 }]
   },
   gamePointIconPositionRight: {
-    transform: [{translateX: (width / 4) * 1.5}]
+    transform: [{ translateX: (width / 4) * 1.5 }]
   },
   gameTitTatToeView: {
     flex: 5.5,
@@ -210,8 +210,11 @@ module.exports = StyleSheet.create({
     backgroundColor: '#FBF8EF'
   },
   gameTitTatToeViewHeightStyle: {
+    position: 'relative',
     width: width - 48,
     height: width - 48,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   gameTitTatToeTable: {
     flex: 1,
@@ -237,5 +240,42 @@ module.exports = StyleSheet.create({
   }, 
   titTatToeButtonCross: {
     backgroundColor: '#DFAEB4'
+  },
+  judgmentLine: {
+    position: 'absolute',
+    width: (width - 64),
+    height: width / 10,
+    backgroundColor: '#F3C969'
+  },
+  judgmentLineForVerticalLeft: {
+    width: (width - 64),
+    transform: [{ translateX: -(width / 4) }, { rotate: '90deg' }]
+  },
+  judgmentLineForVerticalCenter: {
+    width: (width - 64),
+    transform: [{ rotate: '90deg' }]
+  },
+  judgmentLineForVerticalRight: {
+    width: (width - 64),
+    transform: [{ translateX: -(width / 4) }, { rotate: '90deg' }]
+  },
+  judgmentLineForHorizontalTop: {
+    width: (width - 64)
+  },
+  judgmentLineForHorizontalCenter: {
+    width: (width - 64),
+    transform: [{ translateY: -(width / 4) }]
+  },
+  judgmentLineForHorizontalBottom: {
+    width: (width - 64),
+    transform: [{ translateY: (width / 4) }]    
+  },
+  judgmentLineForSlantingRight: {
+    width: width + 36,
+    transform: [{ rotate: '45deg' }]
+  },
+  judgmentLineForSlantingLeft: {
+    width: width + 36,
+    transform: [{ rotate: '-45deg' }]
   }
 });

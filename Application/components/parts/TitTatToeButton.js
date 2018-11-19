@@ -21,14 +21,23 @@ export default class App extends Component<Props> {
     super(props)
   }
 
-  render() {    
+  render() {
     // 記号なしを入れておく
     if (this.props.value === 0) {
-      return (
-        <TouchableOpacity
-          style={[Styles.titTatToeButton, Styles.titTatToeButtonNone]}
-          onPress={() => this.props.onPress(this.props.index)} />
-      )
+      if (this.props.isTouched) {
+        return (
+          <TouchableOpacity
+            style={[Styles.titTatToeButton, Styles.titTatToeButtonNone]}
+            onPress={() => this.props.onPress(this.props.index)} />
+        )
+      }
+
+      else {
+        return (
+          <View
+            style={[Styles.titTatToeButton, Styles.titTatToeButtonNone]} />
+        )
+      }
     }
 
     // ○

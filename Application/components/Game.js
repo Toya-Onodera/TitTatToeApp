@@ -31,7 +31,7 @@ export default class App extends Component<Props> {
       isUseChooseAttack: true,
 
       // ゲームフラグ
-      isGame: true,
+      gameReason: {},
 
       // 先行後攻選択変数
       // 0 -> 先行、 1 -> 後攻
@@ -69,6 +69,7 @@ export default class App extends Component<Props> {
         {/* 下部分 */}
         <GameTitTatToeView
           mapsData={this.state.gameTitTatToeViewMaps}
+          gameReason={this.state.gameReason}
           onPress={this._onPressTitTatToeButton}
         />
         
@@ -120,28 +121,13 @@ export default class App extends Component<Props> {
   }
 
   // 勝利判定を行うメソッド
-  // ○ が勝利なら return 1、 × が勝利なら return 2、 試合が決まっていない or 引き分けなら return 0
+  // ○ が勝利なら result の値が 1、 × が勝利なら 2、 試合が決まっていない or 引き分けなら 0
+  // position の値が 0 -> 縦の左側、 1 -> 縦の中央、 2 -> 縦の右側、 3 -> 横の上側、 4 -> 横の中央、 5 -> 横の下側、 6 -> 斜めの左側が上、 7 -> 斜めの右側が上、 null -> 引き分け 
   _judgmentGame () {
     let i, j;
 
     // 確認用 (計算結果を代入) の変数
     const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice()
-
-    // 横
-    for (i = 0; i < 3; i++) {
-      lineSum = 0;
-
-      for (j = 0; j < 3; j++) {
-        lineSum += gameTitTatToeViewMaps_Copy[(3 * i) + j].value
-      }
-
-      switch (lineSum) {
-        case 30:
-          return 1
-        case -30:
-          return 2
-      }
-    }
 
     // 縦
     for (i = 0; i < 3; i++) {
@@ -153,9 +139,25 @@ export default class App extends Component<Props> {
 
       switch (lineSum) {
         case 30:
-          return 1
+          return { result: 1, position: i }
         case -30:
-          return 2
+          return { result: 2, position: i }
+      }
+    }
+
+    // 横
+    for (i = 0; i < 3; i++) {
+      lineSum = 0;
+
+      for (j = 0; j < 3; j++) {
+        lineSum += gameTitTatToeViewMaps_Copy[(3 * i) + j].value
+      }
+
+      switch (lineSum) {
+        case 30:
+          return { result: 1, position: i + 3 }
+        case -30:
+          return { result: 2, position: i + 3 }
       }
     }
 
@@ -164,9 +166,9 @@ export default class App extends Component<Props> {
     
     switch (lineSum){
       case 30:
-        return 1
+        return { result: 1, position: 6 }
       case -30:
-        return 2
+        return { result: 2, position: 6 }
     }
 
     // 3、5、7 の斜め
@@ -174,23 +176,28 @@ export default class App extends Component<Props> {
 
     switch (lineSum){
       case 30:
-        return 1
+        return { result: 1, position: 7 }
       case -30:
-        return 2
+        return { result: 2, position: 7 }
     }
 
     // 引き分け
     if ((this.state.playFirstPoint + this.state.drawFirstPoint) === 8)
-      return 0
+      return { result: 0, position: null }
 
-    return null
+    return { result: null, position: null }
   }
 
   // 勝利判定のあとの動作メソッド
   _winnerResult () {
     const judgmentResult = this._judgmentGame()
+    
+    // 試合が決まったラインを表示するために state を変更
+    this.setState({
+      gameReason: judgmentResult
+    })
 
-    switch (judgmentResult) {
+    switch (judgmentResult.result) {
       case 0:
         alert('引き分け')
         break
