@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 // StyleSheet
 import Styles from '../style/StyleSheetFile'
 
-const iconFontSize = (Dimensions.get('window').width - 112) / 4;
+const iconFontSize = (Dimensions.get('window').width - 112) / 4
 
 type Props = {};
 export default class App extends Component<Props> {

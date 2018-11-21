@@ -248,34 +248,27 @@ module.exports = StyleSheet.create({
     backgroundColor: '#F3C969'
   },
   judgmentLineForVerticalLeft: {
-    width: (width - 64),
     transform: [{ translateX: -(width / 4) }, { rotate: '90deg' }]
   },
   judgmentLineForVerticalCenter: {
-    width: (width - 64),
     transform: [{ rotate: '90deg' }]
   },
   judgmentLineForVerticalRight: {
-    width: (width - 64),
     transform: [{ translateX: -(width / 4) }, { rotate: '90deg' }]
   },
   judgmentLineForHorizontalTop: {
-    width: (width - 64)
+    // わかりやすいように残しておく
   },
   judgmentLineForHorizontalCenter: {
-    width: (width - 64),
     transform: [{ translateY: -(width / 4) }]
   },
   judgmentLineForHorizontalBottom: {
-    width: (width - 64),
     transform: [{ translateY: (width / 4) }]    
   },
   judgmentLineForSlantingRight: {
-    width: width + 36,
     transform: [{ rotate: '45deg' }]
   },
   judgmentLineForSlantingLeft: {
-    width: width + 36,
     transform: [{ rotate: '-45deg' }]
   }
 });

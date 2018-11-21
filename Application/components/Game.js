@@ -5,7 +5,9 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  UIManager,
+  LayoutAnimation
 } from 'react-native'
 
 // StyleSheet
@@ -25,6 +27,9 @@ type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
     super(props)
+
+    // LayoutAnimation を使用できるようにする
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
 
     this.state = {
       // 選択レイヤー表示フラグ
@@ -50,6 +55,12 @@ export default class App extends Component<Props> {
 
     this._onPressChooseAttackButton = this._onPressChooseAttackButton.bind(this)
     this._onPressTitTatToeButton = this._onPressTitTatToeButton.bind(this)
+  }
+
+  componentWillUpdate () {
+    if (this.state.isUseChooseAttack) {
+      LayoutAnimation.easeInEaseOut()      
+    }
   }
 
   render() {
@@ -197,7 +208,7 @@ export default class App extends Component<Props> {
       gameReason: judgmentResult
     })
 
-    switch (judgmentResult.result) {
+    /*switch (judgmentResult.result) {
       case 0:
         alert('引き分け')
         break
@@ -207,7 +218,7 @@ export default class App extends Component<Props> {
       case 2:
         alert('× の勝利')
         break
-    }
+    }*/
   }
 
   // 仮想敵が動作を行うメソッド、ミニマックス法を使用して動作する TODO: 予定

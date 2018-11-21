@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 import {
   Platform,
   View,
-  LayoutAnimation,
-  Dimensions
+  Animated,
+  Dimensions,
+  UIManager
 } from 'react-native'
 
 // StyleSheet
@@ -16,14 +17,21 @@ export default class App extends Component<Props> {
     super(props)
 
     this.state = {
-    	width: 0
+    	animationWidth: new Animated.Value(0)
     }
   }
 
-  componentDidMount () {
-  	LayoutAnimation.easeInEaseOut();
-    //LayoutAnimation.spring();
-    //setTimeout(() => {this.setState({ width: Dimensions.get('window').width - 64 })}, 1000)
+  componentWillReceiveProps (nextProps) {
+  	if (nextProps.isJudgmentLine) {
+			setTimeout(() => {
+				Animated.spring(
+				this.state.animationWidth,
+					{
+						toValue: (nextProps.index <= 5) ? Dimensions.get('window').width - 64 : Dimensions.get('window').width + 36
+					}
+				).start()
+			}, 300)
+  	}
   }
 
   render() {
@@ -39,8 +47,8 @@ export default class App extends Component<Props> {
       Styles.judgmentLineForSlantingLeft
     ]
 
-  	return (this.props.isJudgmentLine)
-  			? <View style={[Styles.judgmentLine, judgmentLinePositionList[this.props.index], { width: this.state.width }]}></View>
-  			: null
+		return (this.props.isJudgmentLine)
+			? <Animated.View style={[Styles.judgmentLine, judgmentLinePositionList[this.props.index], { width: this.state.animationWidth }]} />
+			: null
   }
 }
