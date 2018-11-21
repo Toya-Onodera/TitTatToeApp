@@ -209,4 +209,9 @@ export default class App extends Component<Props> {
         break
     }
   }
+
+  // 仮想敵が動作を行うメソッド、ミニマックス法を使用して動作する TODO: 予定
+  _goEmeny () {
+    
+  }
 }
