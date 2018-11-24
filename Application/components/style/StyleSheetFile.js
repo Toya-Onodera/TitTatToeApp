@@ -254,7 +254,7 @@ module.exports = StyleSheet.create({
     transform: [{ rotate: '90deg' }]
   },
   judgmentLineForVerticalRight: {
-    transform: [{ translateX: -(width / 4) }, { rotate: '90deg' }]
+    transform: [{ translateX: (width / 4) }, { rotate: '90deg' }]
   },
   judgmentLineForHorizontalTop: {
     // わかりやすいように残しておく
@@ -263,7 +263,7 @@ module.exports = StyleSheet.create({
     transform: [{ translateY: -(width / 4) }]
   },
   judgmentLineForHorizontalBottom: {
-    transform: [{ translateY: (width / 4) }]    
+    transform: [{ translateY: (width / 4) }]
   },
   judgmentLineForSlantingRight: {
     transform: [{ rotate: '45deg' }]

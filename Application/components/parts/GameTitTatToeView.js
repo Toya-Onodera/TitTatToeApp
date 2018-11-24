@@ -14,8 +14,6 @@ import Styles from '../style/StyleSheetFile'
 import TitTatToeButton from './TitTatToeButton'
 import JudgmentLine from './JudgmentLine'
 
-const numColumns = 3
-
 type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
@@ -24,7 +22,7 @@ export default class App extends Component<Props> {
 
   render() {
     // ゲームが進行できるかのフラグ代わり、試合が決まったあとなどに記号がついていないマスをタッチできないようにするときに使用
-    const isGame = (Object.keys(this.props.gameReason).length > 0 && this.props.gameReason.result > 0)                            
+    const isGame = (Object.keys(this.props.gameReason).length > 0 && this.props.gameReason.result > 0)
 
     return (
       <View style={Styles.gameTitTatToeView}>

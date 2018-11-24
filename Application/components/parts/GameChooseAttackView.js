@@ -26,7 +26,7 @@ export default class App extends Component<Props> {
 
           <TouchableOpacity
             style={Styles.gamePlayFirstButton}
-            onPress={() => this.props.onPress(0)}
+            onPress={() => this.props.onPress(false)}
           >
             <Icon name="clear" size={48} color="#FAFAFA" />
             <Text style={Styles.gamePlayChooseButtonText}>先攻</Text>
@@ -34,7 +34,7 @@ export default class App extends Component<Props> {
 
           <TouchableOpacity
             style={Styles.gameDrawFirstButton}
-            onPress={() => this.props.onPress(1)}
+            onPress={() => this.props.onPress(true)}
           >
             <Icon name="radio-button-unchecked" size={48} color="#FAFAFA" />
             <Text style={Styles.gamePlayChooseButtonText}>後攻</Text>

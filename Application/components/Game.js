@@ -35,12 +35,12 @@ export default class App extends Component<Props> {
       // 選択レイヤー表示フラグ
       isUseChooseAttack: true,
 
-      // ゲームフラグ
+      // ゲームフラグ用にも使用
       gameReason: {},
 
       // 先行後攻選択変数
-      // 0 -> 先行、 1 -> 後攻
-      isFirstAttack: 0,
+      // false -> 先行、 true -> 後攻
+      isFirstAttack: null,
 
       // 先攻
       playFirstPoint: 0,
@@ -57,9 +57,16 @@ export default class App extends Component<Props> {
     this._onPressTitTatToeButton = this._onPressTitTatToeButton.bind(this)
   }
 
-  componentWillUpdate () {
+  componentWillUpdate(nextProps, nextState) {
     if (this.state.isUseChooseAttack) {
-      LayoutAnimation.easeInEaseOut()      
+      LayoutAnimation.easeInEaseOut()
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    // TODO: 敵が先行時にはじめに動作させる
+    if (prevState.isUseChooseAttack && this.state.isFirstAttack && this.state.playFirstPoint === 0) {
+      setTimeout(() => { this._goEmeny() }, 500)
     }
   }
 
@@ -74,7 +81,7 @@ export default class App extends Component<Props> {
         <GamePointView
           playFirstPoint={this.state.playFirstPoint}
           drawFirstPoint={this.state.drawFirstPoint}
-          turn={(this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint)}
+          turn={(this.state.playFirstPoint + this.state.drawFirstPoint)}
         />
 
         {/* 下部分 */}
@@ -102,23 +109,25 @@ export default class App extends Component<Props> {
   // setState ではインデックスを直接コピー出来ないのでこの方法を使用する
   _onPressTitTatToeButton (ind) {
     const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice()
-    gameTitTatToeViewMaps_Copy[ind].value = ((this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? -10 : 10
+    gameTitTatToeViewMaps_Copy[ind].value = ((this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? -10 : 10
     
     this.setState({
       gameTitTatToeViewMaps: gameTitTatToeViewMaps_Copy
     })
 
-    
     // 得点を追加する
     this._addPoints()
 
     // 勝利判定を行い、試合が決まれば結果を表示
     this._winnerResult()
-  }
-
+    
+    // 敵の動作へ
+    setTimeout(() => {this._goEmeny()}, 500)
+  }   
+    
   // 得点を追加するメソッド
   _addPoints () {
-    if ((this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) {
+    if ((this.state.isFirstAttack + this.state.playFirstPoint + this.state.drawFirstPoint) % 2 === 0) {
       this.setState(previousState => {
         return { playFirstPoint: previousState.playFirstPoint + 1 }
       })
@@ -158,7 +167,7 @@ export default class App extends Component<Props> {
 
     // 横
     for (i = 0; i < 3; i++) {
-      lineSum = 0;
+      lineSum = 0
 
       for (j = 0; j < 3; j++) {
         lineSum += gameTitTatToeViewMaps_Copy[(3 * i) + j].value
@@ -207,22 +216,34 @@ export default class App extends Component<Props> {
     this.setState({
       gameReason: judgmentResult
     })
-
-    /*switch (judgmentResult.result) {
-      case 0:
-        alert('引き分け')
-        break
-      case 1:
-        alert('○ の勝利')
-        break
-      case 2:
-        alert('× の勝利')
-        break
-    }*/
   }
 
-  // 仮想敵が動作を行うメソッド、ミニマックス法を使用して動作する TODO: 予定
+  // 仮想敵が動作を行うメソッド、ミニマックス法を使用して動作する
   _goEmeny () {
-    
+    if (!(Object.keys(this.state.gameReason).length > 0 && this.state.gameReason.result > 0)) {
+      /*** とりあえず適当な動作をする敵を作成 ***/
+      const priorityIndex = [4, 0, 2, 6, 7, 1, 3, 5, 7]
+      
+      priorityIndex.some(e => {
+        if (this.state.gameTitTatToeViewMaps[e].value === 0) {
+          const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps.slice()
+          gameTitTatToeViewMaps_Copy[e].value = ((this.state.playFirstPoint + this.state.drawFirstPoint) % 2 == 0) ? -10 : 10
+          
+          this.setState({
+            gameTitTatToeViewMaps: gameTitTatToeViewMaps_Copy
+          })
+          
+          // 得点を追加する
+          this._addPoints()
+
+          // 勝利判定を行い、試合が決まれば結果を表示
+          this._winnerResult()
+
+          return true
+        }
+      })
+
+      // TODO: ミニマックス法で実装する
+    }
   }
 }
