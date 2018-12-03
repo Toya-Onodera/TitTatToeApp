@@ -50,7 +50,7 @@ export default class App extends Component<Props> {
 
       // 得点管理用
       // 0 -> 記号なし、 10 -> ○ 、 -10 -> ×
-      gameTitTatToeViewMaps: [{value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}]
+      gameTitTatToeViewMaps: [{value: 10}, {value: 10}, {value: -10}, {value: 10}, {value: -10}, {value: -10}, {value: 0}, {value: 0}, {value: 0}]
     }
 
     this._onPressChooseAttackButton = this._onPressChooseAttackButton.bind(this)
@@ -223,7 +223,8 @@ export default class App extends Component<Props> {
     if (!(Object.keys(this.state.gameReason).length > 0 && this.state.gameReason.result > 0)) {
       /*** とりあえず適当な動作をする敵を作成 ***/
       const turn = (this.state.playFirstPoint + this.state.drawFirstPoint)
-      const gameTitTatToeViewMaps_Copy = Object.assign({}, this.state.gameTitTatToeViewMaps)
+      //const gameTitTatToeViewMaps_Copy = Object.assign({}, this.state.gameTitTatToeViewMaps)
+      const gameTitTatToeViewMaps_Copy = this.state.gameTitTatToeViewMaps
       //const priorityIndex = [4, 0, 8, 2, 6, 1, 7, 3, 5]
       
       /*priorityIndex.some(e => {
@@ -247,7 +248,7 @@ export default class App extends Component<Props> {
 
       // TODO: ミニマックス法で実装する
       //this._resultMinMax(turn, gameTitTatToeViewMaps_Copy, priorityIndex.concat(), 4)
-      this._resultMinMax(turn, gameTitTatToeViewMaps_Copy, 4)
+      this._resultMinMax(gameTitTatToeViewMaps_Copy, turn, 3, true)
       //alert(this._resultMinMax(turn, gameTitTatToeViewMaps_Copy, priorityIndex.concat(), 4))
       //minMax.resultMinMax()
       /*const a = [1, 1, 1]
@@ -262,23 +263,58 @@ export default class App extends Component<Props> {
   // gameVirtualStatus -> マス目の状況が格納されている変数
   // availableIndex -> まだ値が格納されていないマス目
   // putVirtualIndex -> その関数内で置いたマス番号
+  _resultMinMax (gameVirtualStatus, turn, depth, isPlayer) {   
+    // 試合が決まっているか確認
+    const judgmentResult = this._judgmentGame(gameVirtualStatus)
+
+    // 評価値
+    let value, best
+    value = (isPlayer) ? -999 : 999
+
+    // 評価できる状態になったら
+    if (depth === 0 || judgmentResult.result !== null) {
+      //console.log(judgmentResult.result)
+      return 0 //TODO: 評価値を計算する
+    }
+
+    // 打てるマスすべて試す
+    for (let i = 0; i < 9; i++) {
+      if (gameVirtualStatus[i].value === 0) {
+        let gameVirtualStatus_Copy = JSON.parse(JSON.stringify(gameVirtualStatus))
+        gameVirtualStatus_Copy[i].value = (turn % 2 === 0) ? -10 : 10 
+        best = this._resultMinMax(gameVirtualStatus_Copy, turn + 1, depth - 1, !isPlayer)
+
+        if (isPlayer && best < value) {
+          value = best
+        }
+        
+        else if (!isPlayer && best < -value) {
+          value = -best
+        }
+      }
+    }
+
+    console.log(value)
+    return value
+  }
   //_resultMinMax (turn, gameVirtualStatus, availableIndex, putedVirtualIndex) {
-    _resultMinMax (turn, gameVirtualStatus, putedVirtualIndex) {
+  /*_resultMinMax (turn, gameVirtualStatus, putedVirtualIndex) {
     const priorityIndex = [4, 0, 8, 2, 6, 1, 7, 3, 5]
     
     // 試合が決まっているか確認
     const judgmentResult = this._judgmentGame(gameVirtualStatus)
     
     // 評価できる状態になったら
-    if (judgmentResult.result === 0) {
-      alert(gameVirtualStatus)
+    if (judgmentResult.result >= 0) {
       return
     }
 
+      console.log(priorityIndex)
     // 格納されていないマス目の数だけループし、探索を行う
     priorityIndex.forEach((e, i) => {
       // １マス１マス確認するため再帰を使用
       if (gameVirtualStatus[e].value === 0) {
+        //console.log(gameVirtualStatus[e].value)
         // 置いたマスを格納する
         //alert(availableIndex)
 
@@ -295,5 +331,5 @@ export default class App extends Component<Props> {
         //
       }
     })
-  }
+  }*/
 }
